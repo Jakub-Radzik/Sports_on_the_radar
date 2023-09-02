@@ -1,0 +1,9 @@
+{
+  "name": "sports_on_the_radar",
+  "main": "index.js",
+  "author": "Jakub Radzik",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
