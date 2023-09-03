@@ -1,0 +1,15 @@
+{
+  "name": "sports_on_the_radar",
+  "main": "index.js",
+  "author": "Jakub Radzik",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:frontend": "yarn workspace frontend start",
+    "start:backend": "yarn workspace backend start:dev",
+    "test:backend": "yarn workspace backend test",
+    "test:frontend": "yarn workspace frontend test"
+  }
+}
