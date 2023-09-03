@@ -7,8 +7,6 @@ jest.mock('./constants/simulation', () => ({
   GOAL_INTERVAL: 100,
 }));
 
-import { GOAL_INTERVAL, SIMULATION_TIME } from './constants/simulation';
-
 describe('FootballSimulationsService', () => {
   let service: FootballSimulationsService;
 
