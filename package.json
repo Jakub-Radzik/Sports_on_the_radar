@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "start:frontend": "yarn workspace frontend start",
-    "start:backend": "yarn workspace backend start:dev"
+    "start:backend": "yarn workspace backend start:dev",
+    "test:backend": "yarn workspace backend test",
+    "test:frontend": "yarn workspace frontend test"
   }
 }

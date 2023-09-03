@@ -43,7 +43,7 @@ export class FootballSimulationsService {
     }
   }
 
-  public startSimulation(userId: string): Observable<Match[]> {
+  public startSimulation(userId: string): Observable<MatchResult[]> {
     if (!this.simulations.has(userId)) {
       this.initData(userId);
     }
