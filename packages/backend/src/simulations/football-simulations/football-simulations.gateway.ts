@@ -28,21 +28,37 @@ export class FootballSimulationsGateway
     private readonly footballSimulationsService: FootballSimulationsService,
   ) {}
 
-  handleConnection(client: Socket): void {
+  handleConnection(client: Socket): string {
     console.log(`Client connected: ${client.id}`);
+    return 'Connected';
   }
 
   @SubscribeMessage('message')
-  handleEvent(client: Socket, data: string): void {
+  handleMessage(client: Socket, data: string): void {
     switch (data) {
+      case CommunicationMessages.INIT:
+        this.footballSimulationsService.initData(client.id);
+
+        const matches = this.footballSimulationsService.getMatches(client.id);
+
+        this.server.to(client.id).emit(CommunicationMessages.INIT, matches);
+        break;
       case CommunicationMessages.START:
         this.footballSimulationsService
           .startSimulation(client.id)
           .subscribe((match) => {
-            console.log('match', match);
-            this.server
-              .to(client.id)
-              .emit(CommunicationMessages.SCORE_UPDATE, match);
+            if (!match) {
+              this.server
+                .to(client.id)
+                .emit(
+                  CommunicationMessages.SIMULATION_STOPPED,
+                  'Simulation stopped',
+                );
+            } else {
+              this.server
+                .to(client.id)
+                .emit(CommunicationMessages.SCORE_UPDATE, match);
+            }
           });
         break;
       case CommunicationMessages.STOP:

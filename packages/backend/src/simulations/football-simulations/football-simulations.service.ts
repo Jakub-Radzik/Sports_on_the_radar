@@ -21,8 +21,12 @@ export class FootballSimulationsService {
     return this.simulationName;
   }
 
-  private initData(userId: string): void {
+  public initData(userId: string): void {
     this.simulations.set(userId, initedData);
+  }
+
+  public getMatches(userId: string): Match[] {
+    return this.simulations.get(userId) || [];
   }
 
   private getRandomMatch(matches: MatchResult[]): MatchResult {
@@ -52,6 +56,7 @@ export class FootballSimulationsService {
       const simulationInterval = setInterval(() => {
         if (simulationTime <= 0) {
           clearInterval(simulationInterval);
+          observer.next(null);
           observer.complete();
           this.simulations.delete(userId);
           return;
