@@ -3,7 +3,7 @@ import { CSSProperties, PropsWithChildren } from 'react';
 const styles: Record<string, CSSProperties> = {
   card: {
     border: '1px solid black',
-    maxWidth: '300px',
+    minWidth: '300px',
     boxShadow: '0 0 10px rgba(0,0,0,0.5)',
     display: 'flex',
     flexDirection: 'column',
