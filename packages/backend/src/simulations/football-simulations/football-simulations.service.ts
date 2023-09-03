@@ -25,7 +25,7 @@ export class FootballSimulationsService {
     this.simulations.set(userId, JSON.parse(JSON.stringify(initedData)));
   }
 
-  public getMatches(userId: string): Match[] {
+  public getMatches(userId: string): MatchResult[] {
     return this.simulations.get(userId) || [];
   }
 
@@ -34,7 +34,7 @@ export class FootballSimulationsService {
     return matches[randomIndex];
   }
 
-  private simulateGoal(match: MatchResult): void {
+  public simulateGoal(match: MatchResult): void {
     const isHomeTeamScoring = Math.random() < 0.5;
     if (isHomeTeamScoring) {
       match.homeTeamScore++;
@@ -51,7 +51,7 @@ export class FootballSimulationsService {
     return new Observable<MatchResult[]>((observer) => {
       let simulationTime = SIMULATION_TIME;
 
-      const userMatches = this.simulations.get(userId)!;
+      const userMatches = this.getMatches(userId)!;
 
       const simulationInterval = setInterval(() => {
         if (simulationTime <= 0) {
@@ -75,6 +75,5 @@ export class FootballSimulationsService {
 
   public stopSimulation(userId: string): void {
     clearInterval(this.intervals.get(userId)!);
-    this.simulations.delete(userId);
   }
 }
