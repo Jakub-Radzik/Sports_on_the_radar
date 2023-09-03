@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import { MatchResult } from '../types/match';
 
 const styles: Record<string, CSSProperties> = {
   matchRow: {
@@ -9,20 +10,15 @@ const styles: Record<string, CSSProperties> = {
   },
 };
 
-type MatchRowProps = {
-  homeTeam: string;
-  awayTeam: string;
-  homeScore: number;
-  awayScore: number;
-};
+type MatchRowProps = Omit<MatchResult, 'id'>;
 
-export const MatchRow = ({ homeTeam, awayTeam, homeScore, awayScore }: MatchRowProps) => (
+export const MatchRow = ({ homeTeam, awayTeam, homeTeamScore, awayTeamScore }: MatchRowProps) => (
   <div style={styles.matchRow}>
     <p>
       {homeTeam} vs {awayTeam}
     </p>
     <p>
-      {homeScore}:{awayScore}
+      {homeTeamScore}:{awayTeamScore}
     </p>
   </div>
 );
