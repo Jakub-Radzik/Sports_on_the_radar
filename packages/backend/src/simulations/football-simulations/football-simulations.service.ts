@@ -22,7 +22,7 @@ export class FootballSimulationsService {
   }
 
   public initData(userId: string): void {
-    this.simulations.set(userId, initedData);
+    this.simulations.set(userId, JSON.parse(JSON.stringify(initedData)));
   }
 
   public getMatches(userId: string): Match[] {
