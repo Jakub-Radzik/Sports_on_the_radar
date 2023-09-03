@@ -1,7 +1,6 @@
-type GoalsCounterProps = {
-  count: number;
-};
+import { observer } from 'mobx-react';
+import matchesStore from '../../../store/matchesStore';
 
-export const GoalsConter = ({ count }: GoalsCounterProps) => {
-  return <p>Total goals: {count}</p>;
-};
+export const GoalsCounter = observer(() => {
+  return <p>Total goals: {matchesStore.totalGoals}</p>;
+});
